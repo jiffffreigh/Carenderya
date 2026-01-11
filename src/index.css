@@ -1,0 +1,12 @@
+@theme{
+    --font-Josefin: 'Josefin', "sans-serif";
+    --breakpoint-sm: 30rem;
+}
+
+@font-face {
+    font-family: Josefin;
+    src: url("../src/assets/fonts/JosefinSans-Regular.ttf");
+}
+
+
+@import "tailwindcss"
