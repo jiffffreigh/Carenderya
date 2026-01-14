@@ -1,12 +1,7 @@
-import { Link } from 'react-router-dom'
-import { useState } from 'react'
-import logo from '../assets/landingPage/topBar/logoPhone.png'
-import fullLogo from '../assets/landingPage/topBar/fullLogo.png'
-import menuPhone from '../assets/landingPage/topBar/menuPhone.png'
+
 import bannerDesktop from '../assets/landingPage/Banners/bannerDesktop.png'
 import bannerTablet from '../assets/landingPage/Banners/bannerTab.png'
 import banner from '../assets/landingPage/Banners/bannerPhone.png'
-import Slider from 'react-slick'
 import ChickenAdoboSlider from '../assets/landingPage/carousel/ChickenAdobo.webp'
 import MunggoSlider from '../assets/landingPage/carousel/Munggo.webp'
 import PorkSisigSlider from '../assets/landingpage/carousel/PorkSisig.webp'
@@ -16,60 +11,31 @@ import Sinigang from '../assets/landingpage/carousel/Sinigang.webp'
 import BreakFast from '../assets/landingPage/breakfast.webp'
 import Chef from '../assets/landingPage/chef.webp'
 import Cook from '../assets/landingPage/Cook.webp'
-
-
-
-function NextArrow({ onClick }) {
-    return (
-      <button
-        onClick={onClick}
-        className="absolute -right-8 top-1/2 -translate-y-1/2 z-10 h-10 w-10 text-2xl"
-      >
-        {'>'}
-      </button>
-    );
-  }
-  // Custom previous Arrow component
-  function PrevArrow({ onClick }) {
-    return (
-      <button
-        onClick={onClick}
-        className="absolute -left-8 top-1/2 -translate-y-1/2 z-10 h-10 w-10 text-2xl"
-      >
-        {'<'}
-        
-      </button>
-    );
-  }
-  
-
-
+import TwoPeopleCookingMobile from '../assets/landingPage/TwoPeopleCooksMobile.webp'
+import MakingSaladMobile from '../assets/landingPage/MakingSaladMobile.webp'
+import { Swiper, SwiperSlide } from 'swiper/react';
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
+import 'swiper/css/scrollbar';
+import { Navigation, Pagination, Scrollbar, A11y } from 'swiper/modules';
+import TopBar from "../assets/components/topBar.jsx";
 function LandingPage(){
 
-  {/* Menu Toggle Logic */}
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const toggleMenu = () => setIsMenuOpen(true)
-  const closeMenu = () => setIsMenuOpen(false)
-
-  {/* Carousel Settings */}
-   const settings = {
-    infinite: true,
-    speed: 500,
-    slidesToShow: 2,
-    slidesToScroll: 1,
-    prevArrow: <PrevArrow />,
-    nextArrow: <NextArrow />,
-
   
-  };
-  
-const Images =[
-    {id:1, src:ChickenAdoboSlider, alt:"Chicken Adobo"},
+const ImagesCarousel =[
+    {id:1, src:ChickenAdoboSlider, alt:"Chicken Adobo"},  
     {id:2, src:MunggoSlider, alt:"Munggo"},
     {id:3, src:PorkSisigSlider, alt:"Pork Sisig"},
     {id:4, src:PorkBistekSlider, alt:"Pork Bistek"},
     {id:5, src:TinolaSlider, alt:"Tinola"},
     {id:6, src:Sinigang, alt:"Sinigang"},
+]
+
+const ImagesBody =[
+  {id:1, src:BreakFast, alt:"Breakfast Icon"},
+  {id:2, src:Cook, alt:"Cook Icon"},
+  {id:3, src:Chef, alt:"Chef Icon"},
 ]
   
 
@@ -77,39 +43,7 @@ const Images =[
   return (<div className='font-Josefin overflow-x-hidden min-w-screen max-w-screen w-screen h-screen min-h-screen '>
    
     <header>
-      {/*---Top Bar Phone---*/}
-      <div className="bg-[#F2EFEA] p-2 flex md:hidden justify-between place-items-center h-fit w-full">
-       <Link to="/"><img src={logo} alt="Logo"  className='h-[10%] w-[10%] rounded-md'/></Link>
-        <img src={menuPhone} alt="Menu" className='h-[10%] w-[8%] ' onClick={toggleMenu} />
-      </div> 
-
-      
-    {/*--Menu Overlay--*/}
-    {isMenuOpen && (
-    <div className='bg-[#F2EFEA] h-full w-[50%] absolute top-0 right-0 text-black p-5'>
-      <div className=''></div>
-      <p className=' font-bold text-2xl' onClick={closeMenu}>X</p>
-    </div>
-    )}  
-
-      {/*---Top Bar Desktop---*/}
-      <div className="bg-[#F2EFEA] hidden md:flex p-2 justify-between place-items-center h-fit w-full">
-        <Link to="/" className='w-[10%]'><img src={fullLogo} alt="Logo"  className=' rounded-md flex'/></Link>
-        
-        <div className='flex gap-4 ml-30'>
-          <Link to="/" className='text-lg hover:text-[#A31621]'>Home</Link>
-          <Link to="/" className=' text-lg hover:text-[#A31621]'>Recipes</Link>
-          <Link to="/" className=' text-lg hover:text-[#A31621]'>About</Link>
-          <Link to="/" className=' text-lg hover:text-[#A31621]'>Contact</Link>
-          
-        </div>
-
-        <div className='flex'>
-          <button id='signUp'className='mx-1 bg-[#A31621] h-[30px] w-[100px] rounded-md text-[#F2EFE]'>Sign Up</button>
-          <button id='login'className='mx-1 bg-[#F2EFEA] border-1 h-[30px] w-[100px] rounded-md'>Log In</button>
-        </div>
-      
-      </div>
+      <TopBar />
     </header>
 
     {/*---Banner Section---*/}
@@ -126,27 +60,66 @@ const Images =[
       </div>
 
 
-    {/*---Carousel Section---*/}
-      <div id="carousel" className='mt-[15%] flex-col justify-center place-items-center text-center'>
+
+      {/*---Carousel Section---*/}
+      <div id="carousel" className='py-50 flex-col justify-center place-items-center text-center'>
         <h2 className='text-5xl text-[#A31621] '>Browse Recipes</h2>
         <p className='text-xl'>explore amazing flavors.</p> 
 
-  
-        <div className="flex-col w-full px-6 self-center "> 
-              <Slider {...settings}>
-                  {Images.map((image) => (
-                    <div className='w-full h-30 rounded-lg px-4 flex justfy-items-center place-items-center relative' key={image.id}>
-                        <img src={image.src} alt={image.alt}  className="w-30 h-30 object-cover rounded-lg"/>
-                        <p className='absolute top-1/2 -translate-y-1/2 text-[#FFFFFF] text-center'>{image.alt} <br/> <span className='underline opacity-75 text-sm '><Link to={image.alt}>View Recipe</Link></span></p>
-                    </div>))}
-              </Slider>
+        <div className="flex-col w-full py-10 px-4 self-center">
+          <Swiper
+          modules={[Navigation, Pagination, A11y]}
+          slidesPerView={2}
+          navigation
+          loop={true}
+          pagination={{ clickable: true }}
+          breakpoints={{
+            640: {
+              slidesPerView: 3,
+            },
+            768: {
+              slidesPerView: 4,
+            },
+            1280: {
+              slidesPerView: 5,
+            }
+          }}
+          >
+          {ImagesCarousel.map((image) => (
+     
+            <SwiperSlide className='px-4 '>
+              <div key={image.id} className='flex justify-center place-items-center '>
+                <img src={image.src} alt={image.alt} className='h-50 w-60 object-cover rounded-lg' />
+              </div>
+            </SwiperSlide>
+
+            
+          ))}
+          </Swiper>
+                      
         </div>
-      </div> 
-
-
-      <div>
-        <img src="" alt="" />
       </div>
+
+
+
+    {/*---Icons Section---*/}
+    <div className='flex-col lg:flex lg:flex-row justify-center place-items-center text-center  '>
+            {ImagesBody.map((image) => <div key={image.id}  className='flex-col justify-center place-items-center text-center lg:flex-row'>
+              <img src={image.src} alt={image.alt} />
+              <p><span className='text-4xl md:text-5xl text-[#A31621] font-bold'>Lorem ipsum dolor sit</span> <br /> <span className='md:text-xl  '>amet consectetur adipisicing elit. Voluptatibus, expedita eligendi soluta cumque nihil praesentium ad ipsum sequi, doloribus ab quo, aliquam sunt. Enim magnam reiciendis corporis blanditiis laudantium id?</span></p>
+            </div>)}
+    </div>               
+            <div className='py-15'>
+              <div className='rounded-lg md:hidden mt-[20%]'>
+              <img src={MakingSaladMobile} alt="Making Salad"/>
+              </div>
+              <div className='rounded-lg md:hidden mt-[20%]'>
+              <img src={TwoPeopleCookingMobile} alt="Two People Cooking"/>
+              </div>
+            </div>
+
+
+ 
 
     </div>
   

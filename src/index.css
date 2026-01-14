@@ -3,10 +3,20 @@
     --breakpoint-sm: 30rem;
 }
 
+.swiper-button-next,
+.swiper-button-prev {
+  @apply bg-black/70 text-white rounded-full 
+         flex items-center justify-center 
+         hover:bg-black transition;
+}
+
 @font-face {
     font-family: Josefin;
     src: url("../src/assets/fonts/JosefinSans-Regular.ttf");
 }
+
+
+
 
 
 @import "tailwindcss"
